@@ -1,10 +1,22 @@
 <template>
   <div>
-    <h1>Your email is: {{ email }}</h1>
+    <h1>Witaj w systemie do zapis贸w na zaj臋cia</h1>
+    <div v-if="authenticatedUsername != ''">
+    <!-- <h1>Tw贸j email to: {{ email }}</h1> -->
+    <h3 v-if="true">Witaj {{authenticatedUsername}}</h3>
+    <a @click="logMeOut()">Wyloguj</a>
+    </div>
+    <div v-else>
+      Zaloguj si臋 e-mailem 
     <input type="text" v-model="email">
-    <div v-if="email.length < 10">Ale masz kr髏ki adres!</div>
-<div v-else-if="email.length < 15">Tw骿 adres e-mail jest w sam raz.</div>
-<div v-else>Tw骿 adres e-mail jest stanowczo za d硊gi.</div>
+    <button @click="logMeIn()">Zaloguj</button>
+    
+    </div>
+<!-- <div v-if="email.length < 10">Ale masz kr贸tki adres!</div>
+    <div v-else-if="email.length < 15">Tw贸j adres e-mail jest w sam raz.</div>
+    <div v-else>Tw贸j adres e-mail jest stanowczo za d艂ugi.</div>
+    -->
+    
   </div>
 </template>
 
@@ -14,8 +26,20 @@
 export default {
  data() {
   return {
-    email: ''
-  }
+    email: '',
+    authenticatedUsername: ''
+  };
+ },
+ methods: {
+   logMeIn (){
+     this.authenticatedUsername = this.email;   
+     this.email = '';  
+   },
+   logMeOut (){
+     this.authenticatedUsername = '';
+     
+   }
+
  }
 };
 </script>
