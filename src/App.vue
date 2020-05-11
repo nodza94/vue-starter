@@ -1,13 +1,13 @@
 <template>
   <div>
     <h1>System do zapisów na zajęcia</h1>
-    <div v-show="authenticatedUsername != ''">
+    <div v-show="authenticatedUsername">
       <h3 v-show="true">Witaj {{authenticatedUsername}}!</h3>
       <a @click="logMeOut()">Wyloguj</a>
       <meeting-page @click="addMeeting($event)"></meeting-page>
 
     </div>
-    <div v-show="authenticatedUsername == ''">
+    <div v-show="!authenticatedUsername">
       <login-form @login="logMeIn($event) "></login-form>
     </div>
   </div>
@@ -17,7 +17,6 @@
 import "milligram";
 import LoginForm from "./LoginForm";
 import MeetingPage from "./meetings/MeetingPage.vue";
-
 export default {
   components: { LoginForm, MeetingPage },
   data() {

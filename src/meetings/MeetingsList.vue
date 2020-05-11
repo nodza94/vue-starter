@@ -16,7 +16,7 @@
                 <td>{{ meeting.description }}</td>
                 <td>{{ meeting.participants }}</td>
                <td> <button>Zapisz się</button> </td>
-               <td> <button>Usuń puste spotkanie</button> </td>
+               <td> <button @click="removeMeeting">Usuń puste spotkanie</button> </td>
             </tr>
         </tbody>
     </table>
@@ -31,16 +31,14 @@ export default {
     props: ['meetings'],
     data() {
       return {
-          email: ""
+         
       };
     },
     
     methods: {
-        enter(meeting) {
-      this.$emit("delete", this.meeting);
+        
     }
-    },
-
+    ,
       computed: {
   buttonOutLabelToDisplay() {
     return this.buttonLabel || 'Wypisz się';  

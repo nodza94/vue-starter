@@ -3,6 +3,7 @@
 	   <button v-if="!meetingBeingAdded" @click="meetingPossible()">Dodaj Nowe spotkanie</button>
        <new-meeting-form v-else @added="addNewMeeting($event)"></new-meeting-form>
        <meetings-list :meetings="meetings"></meetings-list>
+
     </div>
 </template>
 
@@ -14,12 +15,22 @@ export default {
   data() {
       return {
 		  meetings: [],
-		  meetingBeingAdded: false
+          meetingBeingAdded: false
       };
   },
   methods: {
-	  addNewMeeting(meeting) {this.meetings.push(meeting); this.meetingBeingAdded=false;},
-	  meetingPossible() {this.meetingBeingAdded=true;}
+	  addNewMeeting(meeting) {
+          this.meetings.push(meeting); 
+          this.meetingBeingAdded=false;
+          
+          },
+	  meetingPossible() {
+          this.meetingBeingAdded=true;
+          },
+        removeMeeting(meeting){
+             this.meetings.splice(this.meetings.indexOf(this.meeting),1);
+            
+          }
   }
 }
 </script>
