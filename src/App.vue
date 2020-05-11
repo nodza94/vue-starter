@@ -1,13 +1,13 @@
 <template>
   <div>
     <h1>System do zapisów na zajęcia</h1>
-    <div v-if="authenticatedUsername != ''">
+    <div v-show="authenticatedUsername != ''">
       <h3 v-show="true">Witaj {{authenticatedUsername}}!</h3>
       <a @click="logMeOut()">Wyloguj</a>
-      <meeting-page v-show="status = true" @click="addMeeting($event)"></meeting-page>
+      <meeting-page @click="addMeeting($event)"></meeting-page>
 
     </div>
-    <div v-else>
+    <div v-show="authenticatedUsername == ''">
       <login-form @login="logMeIn($event) "></login-form>
     </div>
   </div>
@@ -23,8 +23,7 @@ export default {
   data() {
     return {
       email: "",
-      authenticatedUsername: "",
-      status: false
+      authenticatedUsername: ""
     };
   },
   methods: {

@@ -35,6 +35,11 @@ export default {
       };
     },
     
+    methods: {
+        enter(meeting) {
+      this.$emit("delete", this.meeting);
+    }
+    },
 
       computed: {
   buttonOutLabelToDisplay() {
