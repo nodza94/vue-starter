@@ -15,35 +15,54 @@
                 <td>{{ meeting.name }}</td>
                 <td>{{ meeting.description }}</td>
                 <td>{{ meeting.participants }}</td>
-               <td> <button>Zapisz się</button> </td>
-               <td> <button @click="removeMeeting">Usuń puste spotkanie</button> </td>
+
+               <td><li v-for="participant in participants" :key="participant.id">{{ participant }}</li></td>
+                <span v-if="participants.length == 0">
+                    <td> <button @click="removeMeeting()">Usuń puste spotkanie</button> </td>
+                    <td> <button @click="addParticipant()">Zapisz się</button> </td>
+                </span>
+                <span v-if="participants.length > 0 && participants.includes(this.newUser)">
+                    <td> <button @click="removeParticipant()">Wypisz się</button> </td>
+                </span>
+                <span v-if="participants.length > 0 && !participants.includes(this.newUser)">
+                     <td> <button @click="addParticipant()">Zapisz się</button> </td>
+                </span>
             </tr>
         </tbody>
     </table>
-    <div v-show="meetings.length == 0">
-        <h5>Brak zaplanowanych spotkań </h5>
-        </div>
+   
         </div>
 </template>
 
 <script>
 export default {
-    props: ['meetings'],
+    props: ['meetings', 'user'],
     data() {
       return {
-         
+         participants: []
       };
     },
     
     methods: {
-        
-    }
-    ,
-      computed: {
-  buttonOutLabelToDisplay() {
-    return this.buttonLabel || 'Wypisz się';  
-  }
-
+        removeMeeting(meetingNameToRemove){
+             if(this.meetings.length >0){
+            for(var i = 0;i < this.meetings.length; i++){
+              if(this.meetings[i].name == meetingNameToRemove){
+                  this.meetings.splice(i,1);
+              }
+            }
+            }
+            
+          },
+          addParticipant(){
+              if(!this.participants.includes(this.user)) {
+                  this.participants.push(this.user);
+              }
+          },
+          removeParticipant(){
+              this.participants.splice(this.participants.indexOf(this.user), 1);
+          }
+   
       } 
 }
 </script>

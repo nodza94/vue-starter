@@ -32,12 +32,7 @@ export default {
     },
     logMeOut() {
       this.authenticatedUsername = "";
-    },
-    
-      statusChange() {
-          this.status = !status;
-         
-      }
+    }
     
   }
 };

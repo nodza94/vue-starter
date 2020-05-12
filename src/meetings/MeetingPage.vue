@@ -2,7 +2,10 @@
     <div>
 	   <button v-if="!meetingBeingAdded" @click="meetingPossible()">Dodaj Nowe spotkanie</button>
        <new-meeting-form v-else @added="addNewMeeting($event)"></new-meeting-form>
-       <meetings-list :meetings="meetings"></meetings-list>
+       <div v-show="meetings.length == 0">
+        <h5>Brak zaplanowanych spotkań </h5>
+        </div>
+       <meetings-list :meetings="meetings" :user="user"></meetings-list>
 
     </div>
 </template>
@@ -12,6 +15,7 @@ import NewMeetingForm from "./NewMeetingForm";
 import MeetingsList from "./MeetingsList";
 export default {
   components: {NewMeetingForm, MeetingsList},
+  props: ['user'],
   data() {
       return {
 		  meetings: [],
@@ -26,10 +30,6 @@ export default {
           },
 	  meetingPossible() {
           this.meetingBeingAdded=true;
-          },
-        removeMeeting(meeting){
-             this.meetings.splice(this.meetings.indexOf(this.meeting),1);
-            
           }
   }
 }
